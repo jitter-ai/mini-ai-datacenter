@@ -1,0 +1,40 @@
+# =========================================================
+# Namespaces
+# =========================================================
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cattle-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps
+---
+# =========================================================
+# Rancher NodePort Service
+# Exposes Rancher on:
+#   HTTP  -> http://<host-ip>:30082
+#   HTTPS -> https://<host-ip>:30444  (optional fallback if Rancher redirects)
+# This service selects Rancher pods by label set by the Rancher chart.
+# =========================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: rancher-nodeport
+  namespace: cattle-system
+  labels:
+    app: rancher
+spec:
+  type: NodePort
+  selector:
+    app: rancher
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 30082
+    - name: https
+      port: 443
+      targetPort: 443
+      nodePort: 30444

@@ -1,0 +1,21 @@
+# .gitignore for Scanner Project
+
+*.sarif
+semgrep.sarif
+*.log
+scan_*.csv
+*_scan.csv
+.dccache
+*.pyc
+__pycache__/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.env
+.vscode/
+.idea/
+
+.DS_Store
+Thumbs.db
